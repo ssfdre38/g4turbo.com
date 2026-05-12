@@ -202,6 +202,38 @@
             background: rgba(139, 92, 246, 0.1);
         }
 
+        .platform-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .platform-badge:hover {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .platform-badge span {
+            color: var(--text-secondary);
+        }
+
         /* Model Cards Section */
         .models-section {
             padding: 6rem 0;
@@ -484,6 +516,21 @@
                         View on GitHub
                     </a>
                 </div>
+
+                <div class="platform-links">
+                    <a href="https://ollama.com/ssfdre38" class="platform-badge">
+                        🦙 <span>Ollama Hub</span>
+                    </a>
+                    <a href="https://huggingface.co/ssfdre38" class="platform-badge">
+                        🤗 <span>Hugging Face</span>
+                    </a>
+                    <a href="https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/gemma4-turbo" class="platform-badge">
+                        📊 <span>Kaggle Submission</span>
+                    </a>
+                    <a href="https://ssfdre38.xyz" class="platform-badge">
+                        👤 <span>Developer Blog</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -660,6 +707,7 @@ e4b   → 4.7 GB   <span class="code-comment"># Balanced</span>
                 <a href="https://github.com/ssfdre38">GitHub</a>
                 <a href="https://ollama.com/ssfdre38">Ollama Hub</a>
                 <a href="https://huggingface.co/ssfdre38">Hugging Face</a>
+                <a href="https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/gemma4-turbo">Kaggle</a>
                 <a href="https://ssfdre38.xyz">Developer</a>
             </div>
             <p>&copy; 2026 G4 Turbo. Built by <a href="https://ssfdre38.xyz" style="color: var(--primary);">ssfdre38</a> for the Gemma 4 Good Hackathon.</p>
