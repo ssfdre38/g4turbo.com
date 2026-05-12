@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research - G4 Turbo</title>
+    <meta name="description" content="G4 Turbo research roadmap: Scout long-context specialist, Grey Liquid experimental playground, and the future of AI optimization.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #111118;
+            --bg-highlight: #1a1a24;
+            --primary: #8b5cf6;
+            --secondary: #06b6d4;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1aa;
+            --border: rgba(139, 92, 246, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        main {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 3rem 0 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .roadmap-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .roadmap-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roadmap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .roadmap-card.production::before {
+            background: var(--accent-green);
+        }
+
+        .roadmap-card.research::before {
+            background: var(--secondary);
+        }
+
+        .roadmap-card.experimental::before {
+            background: var(--accent-yellow);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-production {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .status-research {
+            background: rgba(6, 182, 212, 0.2);
+            border: 1px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .status-experimental {
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
+
+        .roadmap-card h3 {
+            font-size: 2rem;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .roadmap-card .tagline {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .feature-list li {
+            padding: 0.75rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .feature-list li::before {
+            content: '→';
+            color: var(--primary);
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .timeline {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--bg-highlight);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .highlight-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--bg-highlight);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .roadmap-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">G4 Turbo</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/research.html" class="active">Research</a>
+                <a href="https://github.com/ssfdre38/gemma4-turbo">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Research Roadmap</h1>
+            <p style="font-size: 1.3rem; color: var(--text-primary); max-width: 800px;">
+                Pushing the boundaries of AI optimization through production releases, focused research, and experimental exploration.
+            </p>
+
+            <h2>The G4 Turbo Ecosystem</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Status</th>
+                        <th>Purpose</th>
+                        <th>Audience</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>G4 Turbo</strong></td>
+                        <td><span class="status-badge status-production">Production</span></td>
+                        <td>Stable, fast, multimodal AI</td>
+                        <td>17,000+ users</td>
+                    </tr>
+                    <tr>
+                        <td><strong>G4 Nano</strong></td>
+                        <td><span class="status-badge status-production">Production</span></td>
+                        <td>Ultra-lightweight mobile AI</td>
+                        <td>Global accessibility</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Scout</strong></td>
+                        <td><span class="status-badge status-research">Research</span></td>
+                        <td>Long-context specialist</td>
+                        <td>Next release target</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Grey Liquid</strong></td>
+                        <td><span class="status-badge status-experimental">Experimental</span></td>
+                        <td>Radical optimization lab</td>
+                        <td>Research frontier</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="roadmap-grid">
+                <!-- Production: Turbo & Nano -->
+                <div class="roadmap-card production">
+                    <span class="status-badge status-production">✅ Production</span>
+                    <h3>G4 Turbo & Nano</h3>
+                    <p class="tagline">Stable, proven, and serving thousands of users globally</p>
+                    
+                    <p>
+                        Our production models are battle-tested and ready for real-world deployment. With over 17,000 downloads, 
+                        they've proven their reliability across diverse hardware and use cases.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li><strong>Turbo:</strong> 51% faster inference with full multimodal support (vision + audio)</li>
+                        <li><strong>Nano:</strong> 57% size reduction, sub-1GB RAM usage, thermal-neutral on mobile</li>
+                        <li><strong>Distribution:</strong> Ollama Hub and Hugging Face with full documentation</li>
+                        <li><strong>Validation:</strong> Real-world testing on CPUs, phones, and edge devices</li>
+                        <li><strong>Support:</strong> Active maintenance and community engagement</li>
+                    </ul>
+
+                    <div class="timeline">Status: Stable • Ongoing maintenance</div>
+                </div>
+
+                <!-- Research: Scout -->
+                <div class="roadmap-card research">
+                    <span class="status-badge status-research">🔬 Research</span>
+                    <h3>Scout</h3>
+                    <p class="tagline">Long-context specialist with persistent memory capabilities</p>
+                    
+                    <p>
+                        Scout represents the next evolution in context handling. While current models support 128K context windows, 
+                        Scout will optimize for <strong>extended reasoning</strong> and <strong>persistent memory</strong> across sessions.
+                    </p>
+
+                    <h4 style="color: var(--secondary); margin-top: 1.5rem;">Research Goals:</h4>
+                    <ul class="feature-list">
+                        <li><strong>Persistent Context:</strong> Save and resume conversations without quality degradation</li>
+                        <li><strong>Memory Efficiency:</strong> Aggressive optimization for long-context workloads</li>
+                        <li><strong>Target Footprint:</strong> Sub-2GB model size while maintaining 128K context capability</li>
+                        <li><strong>Use Cases:</strong> Extended document analysis, long-form reasoning, research assistance</li>
+                        <li><strong>Quantization:</strong> Exploring Q2_K and hybrid approaches for context efficiency</li>
+                    </ul>
+
+                    <h4 style="color: var(--secondary); margin-top: 1.5rem;">Technical Approach:</h4>
+                    <p style="color: var(--text-secondary);">
+                        Scout will use aggressive quantization on non-critical layers while preserving full precision in 
+                        attention mechanisms critical for long-context understanding. We're researching custom importance 
+                        matrices that prioritize context retention over token generation speed.
+                    </p>
+
+                    <div class="timeline">Target: Q3 2026 • Public research notes</div>
+                </div>
+
+                <!-- Experimental: Grey Liquid -->
+                <div class="roadmap-card experimental">
+                    <span class="status-badge status-experimental">🧪 Experimental</span>
+                    <h3>Grey Liquid Lab</h3>
+                    <p class="tagline">The bleeding edge: radical experiments in AI optimization</p>
+                    
+                    <p>
+                        Grey Liquid is our experimental playground where we push beyond conventional limits. No promises, 
+                        no timelines—just pure curiosity-driven research into the theoretical boundaries of optimization.
+                    </p>
+
+                    <h4 style="color: var(--accent-yellow); margin-top: 1.5rem;">What We're Exploring:</h4>
+                    <ul class="feature-list">
+                        <li><strong>Extreme Quantization:</strong> Q1_K, 1.5-bit quants, finding the absolute floor of intelligence</li>
+                        <li><strong>Custom Importance Matrices:</strong> Task-specific weight prioritization (code-only, math-only models)</li>
+                        <li><strong>Thermal Optimization:</strong> Zero-overhead inference, testing the "liquid flow" hypothesis</li>
+                        <li><strong>Sub-500MB Target:</strong> The theoretical endgame—can we get below half a gigabyte?</li>
+                        <li><strong>Hybrid Techniques:</strong> Mixing quantization methods, dynamic precision, experimental architectures</li>
+                    </ul>
+
+                    <h4 style="color: var(--accent-yellow); margin-top: 1.5rem;">The Philosophy:</h4>
+                    <p style="color: var(--text-secondary);">
+                        Grey Liquid represents the idea that AI can <em>flow through silicon</em> without generating heat or friction—
+                        the sixth state of matter applied to computation. It's the endgame of thermal-neutral logic, where the barrier 
+                        between hardware and intelligence disappears.
+                    </p>
+
+                    <div class="highlight-box" style="border-left-color: var(--accent-yellow);">
+                        <h4 style="color: var(--accent-yellow); margin-top: 0;">Why Keep It Experimental?</h4>
+                        <p>
+                            Production models serve 17,000+ users who depend on stability. Grey Liquid is where we can fail fast, 
+                            break things, and learn from the edges. Discoveries here eventually trickle down into stable releases—
+                            but only after they're proven.
+                        </p>
+                    </div>
+
+                    <div class="timeline">Status: Ongoing • Private lab • Publish findings when significant</div>
+                </div>
+            </div>
+
+            <h2>Research Principles</h2>
+
+            <div class="highlight-box">
+                <h3>1. Ship Stable, Experiment Radical</h3>
+                <p>
+                    Production models (turbo/nano) maintain backward compatibility and reliability. Research projects (Scout) 
+                    have clear goals and timelines. Experimental work (Grey Liquid) has freedom to fail.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>2. Open Science, Closed Labs</h3>
+                <p>
+                    All production models and research findings are open-source and documented. Experimental work stays private 
+                    until it yields reproducible, significant results worth sharing.
+                </p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>3. Hardware Reality Over Benchmarks</h3>
+                <p>
+                    We test on real devices: phones that overheat, laptops without GPUs, Raspberry Pis. Lab benchmarks matter, 
+                    but real-world validation is the ultimate test.
+                </p>
+            </div>
+
+            <h2>Published Research</h2>
+            <p>
+                For detailed technical analysis of our production models, read the full research article:
+            </p>
+            <div style="margin: 2rem 0;">
+                <a href="https://ssfdre38.xyz/research.html" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                    Beyond TurboQuant: The gemma4-nano Journey →
+                </a>
+            </div>
+
+            <h2>Get Involved</h2>
+            <p>
+                Want to contribute to G4 Turbo research? We welcome:
+            </p>
+            <ul class="feature-list">
+                <li>Real-world testing reports (especially mobile and edge devices)</li>
+                <li>Quantization experiments and findings</li>
+                <li>Performance benchmarks on diverse hardware</li>
+                <li>Use case feedback and optimization suggestions</li>
+                <li>Documentation improvements and tutorials</li>
+            </ul>
+
+            <div style="margin: 3rem 0; text-align: center;">
+                <a href="https://github.com/ssfdre38/gemma4-turbo" style="display: inline-block; padding: 1rem 2rem; background: transparent; border: 2px solid var(--border); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                    Contribute on GitHub →
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/ssfdre38/gemma4-turbo">GitHub</a>
+                <a href="https://ollama.com/ssfdre38">Ollama Hub</a>
+                <a href="https://huggingface.co/ssfdre38">Hugging Face</a>
+                <a href="https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/gemma4-turbo">Kaggle</a>
+                <a href="https://ssfdre38.xyz/research.html">Research</a>
+                <a href="https://ssfdre38.xyz">Developer</a>
+            </div>
+            <p>&copy; 2026 G4 Turbo. Built by <a href="https://ssfdre38.xyz" style="color: var(--primary);">ssfdre38</a> for the Gemma 4 Good Hackathon.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Apache 2.0 License • Based on Google Gemma 4</p>
+        </div>
+    </footer>
+</body>
+</html>

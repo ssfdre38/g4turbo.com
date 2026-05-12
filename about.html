@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - G4 Turbo</title>
+    <meta name="description" content="About G4 Turbo: Optimizing Gemma 4 for real-world hardware. The mission, the team, and the vision behind faster, smaller, local AI.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #111118;
+            --bg-highlight: #1a1a24;
+            --primary: #8b5cf6;
+            --secondary: #06b6d4;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1aa;
+            --border: rgba(139, 92, 246, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        main {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 3rem 0 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--primary);
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .principle-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .principle-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .principle-card h3 {
+            margin-top: 0;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        ul li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        ul li::before {
+            content: '→';
+            color: var(--primary);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats-grid, .principles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">G4 Turbo</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about.html" class="active">About</a>
+                <a href="/research.html">Research</a>
+                <a href="https://github.com/ssfdre38/gemma4-turbo">GitHub</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>About G4 Turbo</h1>
+            <p style="font-size: 1.3rem; color: var(--text-primary); max-width: 800px;">
+                Making powerful AI accessible to everyone, regardless of their hardware. 
+                No cloud dependency, no privacy concerns, no compromises.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">51%</span>
+                    <span class="stat-label">Faster Inference</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">57%</span>
+                    <span class="stat-label">Size Reduction</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">17K+</span>
+                    <span class="stat-label">Downloads</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Local & Private</span>
+                </div>
+            </div>
+
+            <h2>The Mission</h2>
+            <p>
+                When Google released Gemma 4, they claimed it was "mobile-ready." We tested it on real hardware and found a different story: 
+                a 7.2 GB model doesn't run well on an 8 GB phone. It overheats, throttles, and becomes unusable.
+            </p>
+            <p>
+                <strong>We decided to fix that.</strong>
+            </p>
+
+            <div class="highlight-box">
+                <h3>The Problem We're Solving</h3>
+                <p>
+                    AI is increasingly cloud-dependent, expensive, and inaccessible to billions of people without high-end hardware or 
+                    reliable internet. The "mobile-ready" promise was marketing, not engineering reality.
+                </p>
+            </div>
+
+            <p>
+                G4 Turbo started as an experiment: could we optimize Gemma 4 for <em>real-world hardware</em> without sacrificing quality? 
+                The answer turned out to be yes—and the results exceeded our expectations.
+            </p>
+
+            <h2>Core Principles</h2>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <div class="principle-icon">⚡</div>
+                    <h3>Performance First</h3>
+                    <p>
+                        51% faster inference isn't theoretical. We measured it on real CPU hardware running real workloads. 
+                        Every optimization is validated with benchmarks.
+                    </p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">🔒</div>
+                    <h3>Privacy by Design</h3>
+                    <p>
+                        100% local inference. Your data never leaves your device. No telemetry, no tracking, no cloud dependencies. 
+                        Your AI, your hardware, your control.
+                    </p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">🌍</div>
+                    <h3>Digital Equity</h3>
+                    <p>
+                        AI shouldn't require a $3,000 GPU. Our nano models run on phones, Raspberry Pis, and decade-old laptops. 
+                        Powerful AI for everyone, everywhere.
+                    </p>
+                </div>
+
+                <div class="principle-card">
+                    <div class="principle-icon">🔬</div>
+                    <h3>Open Research</h3>
+                    <p>
+                        All models are Apache 2.0. All methods are documented. Anyone can reproduce, verify, and build upon our work. 
+                        Science thrives in the open.
+                    </p>
+                </div>
+            </div>
+
+            <h2>The Team</h2>
+            <p>
+                G4 Turbo is built by <strong>ssfdre38 (Daniel Elliott)</strong>, an independent AI researcher focused on making 
+                powerful models accessible to real-world hardware.
+            </p>
+
+            <div class="highlight-box">
+                <h3>What Drives This Work</h3>
+                <p>
+                    I believe AI should be a tool that empowers people, not a service that exploits them. When Google said 
+                    Gemma 4 was "mobile-ready" but my phone overheated running it, I knew there was a gap between marketing 
+                    and reality.
+                </p>
+                <p>
+                    This project exists to close that gap. To prove that with the right optimizations, AI can run <em>anywhere</em>—on 
+                    your phone, your laptop, your Raspberry Pi. No cloud required, no privacy compromised.
+                </p>
+            </div>
+
+            <h2>The Technology Stack</h2>
+            <ul>
+                <li><strong>Base Models:</strong> Google Gemma 4 (e2b, e4b, 26b, 31b)</li>
+                <li><strong>Quantization:</strong> IQ4_XS (turbo) and Q3_K_S (nano) via llama.cpp</li>
+                <li><strong>Distribution:</strong> Ollama Hub and Hugging Face</li>
+                <li><strong>Testing:</strong> Real hardware (Intel Xeon CPUs, consumer phones, laptops)</li>
+                <li><strong>Validation:</strong> Mobile thermal testing, RAM usage monitoring, real-world benchmarks</li>
+            </ul>
+
+            <h2>Why It Matters</h2>
+            <p>
+                The AI industry is centralizing. Cloud providers want you dependent on their infrastructure. Device manufacturers 
+                want you buying new hardware every year. Meanwhile, billions of people are left behind because they don't have 
+                the "right" devices.
+            </p>
+            <p>
+                <strong>G4 Turbo proves there's a better way.</strong>
+            </p>
+            <p>
+                By optimizing models for the hardware people already own—not the hardware they <em>should</em> buy—we're making 
+                AI accessible to the global majority, not just the privileged few.
+            </p>
+
+            <div class="highlight-box">
+                <h3>Impact Beyond Downloads</h3>
+                <p>
+                    With 17,000+ downloads and growing, G4 Turbo models are running on devices in countries where cloud AI is 
+                    prohibitively expensive or unavailable. Students are using nano models on old laptops. Developers are 
+                    building privacy-first apps with turbo models. Researchers are extending our work in ways we never imagined.
+                </p>
+                <p>
+                    That's the real metric of success: <strong>enabling others to build.</strong>
+                </p>
+            </div>
+
+            <h2>What's Next</h2>
+            <p>
+                The turbo and nano families are stable and production-ready. But we're not done. Check out our 
+                <a href="/research.html" style="color: var(--primary);">research roadmap</a> to see where we're headed next.
+            </p>
+
+            <div style="margin: 3rem 0; text-align: center;">
+                <a href="/" style="display: inline-block; padding: 1rem 2rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                    Get Started with G4 Turbo →
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/ssfdre38/gemma4-turbo">GitHub</a>
+                <a href="https://ollama.com/ssfdre38">Ollama Hub</a>
+                <a href="https://huggingface.co/ssfdre38">Hugging Face</a>
+                <a href="https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/gemma4-turbo">Kaggle</a>
+                <a href="https://ssfdre38.xyz/research.html">Research</a>
+                <a href="https://ssfdre38.xyz">Developer</a>
+            </div>
+            <p>&copy; 2026 G4 Turbo. Built by <a href="https://ssfdre38.xyz" style="color: var(--primary);">ssfdre38</a> for the Gemma 4 Good Hackathon.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Apache 2.0 License • Based on Google Gemma 4</p>
+        </div>
+    </footer>
+</body>
+</html>
