@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G4 Turbo - Optimized Gemma 4 Models for Everyone</title>
+    <meta name="description" content="Gemma 4 optimized for real hardware. 51% faster inference, 50%+ smaller models, fully local. Run powerful AI on CPU, mobile, and edge devices.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #111118;
+            --bg-highlight: #1a1a24;
+            --primary: #8b5cf6;
+            --secondary: #06b6d4;
+            --accent: #f59e0b;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1aa;
+            --border: rgba(139, 92, 246, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15), transparent 70%);
+            border-radius: 50%;
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+            max-width: 700px;
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Model Cards Section */
+        .models-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .model-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .model-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .model-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .model-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .model-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .model-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .model-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .model-card .tagline {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .model-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .model-features li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .model-features li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .model-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: var(--bg-highlight);
+            border-radius: 8px;
+        }
+
+        .model-stat {
+            text-align: center;
+        }
+
+        .model-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .model-stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .model-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .model-link {
+            flex: 1;
+            padding: 0.75rem;
+            background: var(--bg-highlight);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .model-link:hover {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Quick Start Section */
+        .quickstart-section {
+            padding: 6rem 0;
+            background: var(--bg-card);
+        }
+
+        .code-block {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            color: var(--text-primary);
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .code-comment {
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .model-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">G4 Turbo</a>
+            <div class="nav-links">
+                <a href="#models">Models</a>
+                <a href="#quickstart">Quick Start</a>
+                <a href="https://github.com/ssfdre38">GitHub</a>
+                <a href="https://ssfdre38.xyz">Developer</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>
+                    Gemma 4, <span class="gradient-text">Optimized</span><br>
+                    for Real Hardware
+                </h1>
+                <p class="hero-subtitle">
+                    Run powerful AI on your CPU, mobile device, or edge hardware. 
+                    51% faster inference, 50%+ smaller models, fully local and private.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">51%</span>
+                        <span class="stat-label">Faster Inference</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">57%</span>
+                        <span class="stat-label">Size Reduction</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Local & Private</span>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="#quickstart" class="btn btn-primary">
+                        Get Started →
+                    </a>
+                    <a href="https://github.com/ssfdre38" class="btn btn-secondary">
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="models" class="models-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Model Family</h2>
+                <p>From multimodal powerhouses to ultra-lightweight mobile models, optimized for every use case.</p>
+            </div>
+
+            <div class="model-cards">
+                <!-- Turbo Card -->
+                <div class="model-card">
+                    <span class="model-badge">MULTIMODAL</span>
+                    <h3>gemma4-turbo</h3>
+                    <p class="tagline">Full-featured AI with vision and audio support</p>
+                    
+                    <div class="model-stats-grid">
+                        <div class="model-stat">
+                            <div class="model-stat-value">+51%</div>
+                            <div class="model-stat-label">Faster</div>
+                        </div>
+                        <div class="model-stat">
+                            <div class="model-stat-value">IQ4_XS</div>
+                            <div class="model-stat-label">Quantization</div>
+                        </div>
+                        <div class="model-stat">
+                            <div class="model-stat-value">4.3-18 GB</div>
+                            <div class="model-stat-label">Model Sizes</div>
+                        </div>
+                        <div class="model-stat">
+                            <div class="model-stat-value">17K+</div>
+                            <div class="model-stat-label">Downloads</div>
+                        </div>
+                    </div>
+
+                    <ul class="model-features">
+                        <li>Vision and audio capabilities</li>
+                        <li>51% faster than stock Gemma 4</li>
+                        <li>4 model sizes (e2b, e4b, 26b, 31b)</li>
+                        <li>Tool calling and function support</li>
+                        <li>Windows-optimized for CPU inference</li>
+                    </ul>
+
+                    <div class="model-links">
+                        <a href="https://ollama.com/ssfdre38/gemma4-turbo" class="model-link">Ollama Hub</a>
+                        <a href="https://huggingface.co/ssfdre38/gemma4-turbo-gguf" class="model-link">Hugging Face</a>
+                    </div>
+                </div>
+
+                <!-- Nano Card -->
+                <div class="model-card">
+                    <span class="model-badge">ULTRA-LIGHTWEIGHT</span>
+                    <h3>gemma4-nano</h3>
+                    <p class="tagline">Mobile-first AI that actually works on real devices</p>
+                    
+                    <div class="model-stats-grid">
+                        <div class="model-stat">
+                            <div class="model-stat-value">57%</div>
+                            <div class="model-stat-label">Smaller</div>
+                        </div>
+                        <div class="model-stat">
+                            <div class="model-stat-value">Q3_K_S</div>
+                            <div class="model-stat-label">Quantization</div>
+                        </div>
+                        <div class="model-stat">
+                            <div class="model-stat-value">3.1-14 GB</div>
+                            <div class="model-stat-label">Model Sizes</div>
+                        </div>
+                        <div class="model-stat">
+                            <div class="model-stat-value">&lt;1 GB</div>
+                            <div class="model-stat-label">RAM Usage</div>
+                        </div>
+                    </div>
+
+                    <ul class="model-features">
+                        <li>Text-only, optimized for mobile/edge</li>
+                        <li>Sub-1GB RAM usage (891.7 MB total)</li>
+                        <li>Stays cool on 8GB RAM phones</li>
+                        <li>Full 4.5B params, 128K context</li>
+                        <li>13% faster than turbo on CPU</li>
+                    </ul>
+
+                    <div class="model-links">
+                        <a href="https://ollama.com/ssfdre38/gemma4-nano" class="model-link">Ollama Hub</a>
+                        <a href="https://huggingface.co/ssfdre38/gemma4-nano-gguf" class="model-link">Hugging Face</a>
+                    </div>
+                </div>
+
+                <!-- Future Card -->
+                <div class="model-card">
+                    <span class="model-badge">COMING SOON</span>
+                    <h3>More Variants</h3>
+                    <p class="tagline">Pushing the boundaries of AI optimization</p>
+                    
+                    <div class="model-stats-grid">
+                        <div class="model-stat">
+                            <div class="model-stat-value">🚀</div>
+                            <div class="model-stat-label">In Progress</div>
+                        </div>
+                        <div class="model-stat">
+                            <div class="model-stat-value">∞</div>
+                            <div class="model-stat-label">Possibilities</div>
+                        </div>
+                    </div>
+
+                    <ul class="model-features">
+                        <li>Experimental quantization methods</li>
+                        <li>Specialized task-optimized variants</li>
+                        <li>Even smaller mobile models</li>
+                        <li>Performance tuning research</li>
+                        <li>Community-driven development</li>
+                    </ul>
+
+                    <div class="model-links">
+                        <a href="https://github.com/ssfdre38" class="model-link">Follow on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quickstart" class="quickstart-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Get Started in Seconds</h2>
+                <p>One command to run powerful local AI on your hardware</p>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h3 style="margin-bottom: 1rem;">Option 1: Ollama (Recommended)</h3>
+                <div class="code-block">
+                    <pre><span class="code-comment"># Install Ollama from https://ollama.com</span>
+
+<span class="code-comment"># For multimodal AI with vision:</span>
+ollama run ssfdre38/gemma4-turbo:e4b
+
+<span class="code-comment"># For ultra-lightweight mobile/edge:</span>
+ollama run ssfdre38/gemma4-nano:e2b
+
+<span class="code-comment"># That's it! Start chatting with local AI 🚀</span></pre>
+                </div>
+
+                <h3 style="margin: 3rem 0 1rem;">Option 2: Direct GGUF Download</h3>
+                <div class="code-block">
+                    <pre><span class="code-comment"># Download from Hugging Face:</span>
+wget https://huggingface.co/ssfdre38/gemma4-turbo-gguf/resolve/main/gemma4-e4b-iq4xs-turbo.gguf
+
+<span class="code-comment"># Use with llama.cpp, Ollama, or any GGUF-compatible tool</span></pre>
+                </div>
+
+                <h3 style="margin: 3rem 0 1rem;">Model Size Guide</h3>
+                <div class="code-block">
+                    <pre><span class="code-comment"># Turbo (multimodal):</span>
+e2b   → 4.3 GB   <span class="code-comment"># Smallest with vision</span>
+e4b   → 6.1 GB   <span class="code-comment"># Recommended default</span>
+26b   → 15 GB    <span class="code-comment"># High capability</span>
+31b   → 18 GB    <span class="code-comment"># Maximum performance</span>
+
+<span class="code-comment"># Nano (text-only):</span>
+e2b   → 3.1 GB   <span class="code-comment"># Mobile-ready</span>
+e4b   → 4.7 GB   <span class="code-comment"># Balanced</span>
+26b   → 12 GB    <span class="code-comment"># High quality</span>
+31b   → 14 GB    <span class="code-comment"># Best performance</span></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/ssfdre38">GitHub</a>
+                <a href="https://ollama.com/ssfdre38">Ollama Hub</a>
+                <a href="https://huggingface.co/ssfdre38">Hugging Face</a>
+                <a href="https://ssfdre38.xyz">Developer</a>
+            </div>
+            <p>&copy; 2026 G4 Turbo. Built by <a href="https://ssfdre38.xyz" style="color: var(--primary);">ssfdre38</a> for the Gemma 4 Good Hackathon.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Apache 2.0 License • Based on Google Gemma 4</p>
+        </div>
+    </footer>
+</body>
+</html>
