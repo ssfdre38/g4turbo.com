@@ -611,7 +611,7 @@
                             <div class="model-stat-label">Model Sizes</div>
                         </div>
                         <div class="model-stat">
-                            <div class="model-stat-value">17K+</div>
+                            <div class="model-stat-value" id="stat-turbo-dl">17K+</div>
                             <div class="model-stat-label">Downloads</div>
                         </div>
                     </div>
@@ -759,6 +759,7 @@ e4b   → 4.7 GB   <span class="code-comment"># Balanced</span>
                 <a href="https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/gemma4-turbo">Kaggle</a>
                 <a href="https://ssfdre38.xyz/research.html">Research</a>
                 <a href="https://ssfdre38.xyz">Developer</a>
+                <a href="https://ko-fi.com/ssfdre38" target="_blank">☕ Support</a>
             </div>
             <p>&copy; 2026 G4 Turbo. Built by <a href="https://ssfdre38.xyz" style="color: var(--primary);">ssfdre38</a> for the Gemma 4 Good Hackathon.</p>
             <p style="margin-top: 0.5rem; font-size: 0.9rem;">Apache 2.0 License • Based on Google Gemma 4</p>
@@ -780,6 +781,13 @@ e4b   → 4.7 GB   <span class="code-comment"># Balanced</span>
                 }
             });
         }
+    </script>
+    <script>
+        fetch('/stats.json').then(r => r.json()).then(d => {
+            const fmt = n => n >= 1000 ? (Math.round(n / 100) / 10).toFixed(1) + 'K+' : n + '+';
+            const el = document.getElementById('stat-turbo-dl');
+            if (el && d.total) el.textContent = fmt(d.total);
+        }).catch(() => {});
     </script>
 </body>
 </html>
