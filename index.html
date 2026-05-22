@@ -425,8 +425,9 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
 
         .footer-links a {
@@ -505,6 +506,37 @@
             .menu-toggle { display: block; }
             .nav-links {
                 display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .platform-badge {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .model-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -611,7 +643,7 @@
                             <div class="model-stat-label">Model Sizes</div>
                         </div>
                         <div class="model-stat">
-                            <div class="model-stat-value" id="stat-turbo-dl">17K+</div>
+                            <div class="model-stat-value" id="stat-turbo-dl">22K+</div>
                             <div class="model-stat-label">Downloads</div>
                         </div>
                     </div>

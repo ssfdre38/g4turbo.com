@@ -230,10 +230,15 @@
             margin: 2rem 0;
         }
 
+        .comparison-table-wrap {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 2rem 0;
+        }
+
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 2rem 0;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -342,6 +347,30 @@
                 padding: 1.5rem;
             }
         }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .roadmap-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            main {
+                padding-top: 90px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -367,6 +396,7 @@
 
             <h2>The G4 Turbo Ecosystem</h2>
 
+            <div class="comparison-table-wrap">
             <table class="comparison-table">
                 <thead>
                     <tr>
@@ -381,7 +411,7 @@
                         <td><strong>G4 Turbo</strong></td>
                         <td><span class="status-badge status-production">Production</span></td>
                         <td>Stable, fast, multimodal AI</td>
-                        <td>17,000+ users</td>
+                        <td>22,000+ users</td>
                     </tr>
                     <tr>
                         <td><strong>G4 Nano</strong></td>
@@ -403,6 +433,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
 
             <div class="roadmap-grid">
                 <!-- Production: Turbo & Nano -->
@@ -412,7 +443,7 @@
                     <p class="tagline">Stable, proven, and serving thousands of users globally</p>
                     
                     <p>
-                        Our production models are battle-tested and ready for real-world deployment. With over 17,000 downloads, 
+                        Our production models are battle-tested and ready for real-world deployment. With over 22,000 downloads, 
                         they've proven their reliability across diverse hardware and use cases.
                     </p>
 
@@ -487,7 +518,7 @@
                     <div class="highlight-box" style="border-left-color: var(--accent-yellow);">
                         <h4 style="color: var(--accent-yellow); margin-top: 0;">Why Keep It Experimental?</h4>
                         <p>
-                            Production models serve 17,000+ users who depend on stability. Grey Liquid is where we can fail fast, 
+                            Production models serve 22,000+ users who depend on stability. Grey Liquid is where we can fail fast, 
                             break things, and learn from the edges. Discoveries here eventually trickle down into stable releases—
                             but only after they're proven.
                         </p>
