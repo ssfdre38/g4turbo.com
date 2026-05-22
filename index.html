@@ -643,7 +643,7 @@
                             <div class="model-stat-label">Model Sizes</div>
                         </div>
                         <div class="model-stat">
-                            <div class="model-stat-value" id="stat-turbo-dl">22K+</div>
+                            <div class="model-stat-value" id="stat-turbo-dl">19.6K+</div>
                             <div class="model-stat-label">Downloads</div>
                         </div>
                     </div>
@@ -682,8 +682,8 @@
                             <div class="model-stat-label">Model Sizes</div>
                         </div>
                         <div class="model-stat">
-                            <div class="model-stat-value">&lt;1 GB</div>
-                            <div class="model-stat-label">RAM Usage</div>
+                            <div class="model-stat-value" id="stat-nano-dl">2.7K+</div>
+                            <div class="model-stat-label">Downloads</div>
                         </div>
                     </div>
 
@@ -815,11 +815,35 @@ e4b   → 4.7 GB   <span class="code-comment"># Balanced</span>
         }
     </script>
     <script>
-        fetch('/stats.json').then(r => r.json()).then(d => {
-            const fmt = n => n >= 1000 ? (Math.round(n / 100) / 10).toFixed(1) + 'K+' : n + '+';
-            const el = document.getElementById('stat-turbo-dl');
-            if (el && d.total) el.textContent = fmt(d.total);
-        }).catch(() => {});
+        const fmt = n => {
+            if (n >= 1000) return (Math.round(n / 100) / 10).toFixed(1) + 'K+';
+            return n + '+';
+        };
+
+        async function updateDownloadCounts() {
+            // Load Ollama baseline counts from stats.json
+            const stats = await fetch('/stats.json').then(r => r.json()).catch(() => ({}));
+            const turboOllama = stats?.turbo?.ollama ?? 0;
+            const nanoOllama  = stats?.nano?.ollama  ?? 0;
+
+            // Fetch live HuggingFace download counts
+            const [turboHF, nanoHF] = await Promise.all([
+                fetch('https://huggingface.co/api/models/ssfdre38/gemma4-turbo-gguf')
+                    .then(r => r.json()).then(d => d.downloads || 0).catch(() => 0),
+                fetch('https://huggingface.co/api/models/ssfdre38/gemma4-nano-gguf')
+                    .then(r => r.json()).then(d => d.downloads || 0).catch(() => 0)
+            ]);
+
+            const turboTotal = turboOllama + turboHF;
+            const nanoTotal  = nanoOllama  + nanoHF;
+
+            const turboDlEl = document.getElementById('stat-turbo-dl');
+            const nanoDlEl  = document.getElementById('stat-nano-dl');
+            if (turboDlEl && turboTotal > 0) turboDlEl.textContent = fmt(turboTotal);
+            if (nanoDlEl  && nanoTotal  > 0) nanoDlEl.textContent  = fmt(nanoTotal);
+        }
+
+        updateDownloadCounts();
     </script>
 </body>
 </html>
