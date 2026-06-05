@@ -651,7 +651,7 @@
                     <ul class="model-features">
                         <li>Vision and audio capabilities</li>
                         <li>51% faster than stock Gemma 4</li>
-                        <li>4 model sizes (e2b, e4b, 26b, 31b)</li>
+                        <li>5 model sizes (e2b, e4b, 12b, 26b, 31b)</li>
                         <li>Tool calling and function support</li>
                         <li>Windows-optimized for CPU inference</li>
                     </ul>
@@ -768,12 +768,14 @@ wget https://huggingface.co/ssfdre38/gemma4-turbo-gguf/resolve/main/gemma4-e4b-i
                     <pre><span class="code-comment"># Turbo (multimodal):</span>
 e2b   → 4.3 GB   <span class="code-comment"># Smallest with vision</span>
 e4b   → 6.1 GB   <span class="code-comment"># Recommended default</span>
+12b   → 6.9 GB   <span class="code-comment"># Balanced multimodal</span>
 26b   → 15 GB    <span class="code-comment"># High capability</span>
 31b   → 18 GB    <span class="code-comment"># Maximum performance</span>
 
 <span class="code-comment"># Nano (text-only):</span>
 e2b   → 3.1 GB   <span class="code-comment"># Mobile-ready</span>
 e4b   → 4.7 GB   <span class="code-comment"># Balanced</span>
+12b   → 5.7 GB   <span class="code-comment"># Balanced reasoning</span>
 26b   → 12 GB    <span class="code-comment"># High quality</span>
 31b   → 14 GB    <span class="code-comment"># Best performance</span></pre>
                 </div>
