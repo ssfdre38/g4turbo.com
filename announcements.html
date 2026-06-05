@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Announcements - G4 Turbo</title>
+    <meta name="description" content="Latest news, milestones, and updates from the G4 Turbo project. Celebrating community growth and performance breakthroughs.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #111118;
+            --bg-highlight: #1a1a24;
+            --primary: #8b5cf6;
+            --secondary: #06b6d4;
+            --text-primary: #f5f5f7;
+            --text-secondary: #a1a1aa;
+            --border: rgba(139, 92, 246, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        main {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .announcement-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .announcement-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .announcement-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .announcement-date {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .announcement-card h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .announcement-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .milestone-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(6, 182, 212, 0.15);
+            border: 1px solid var(--secondary);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-text {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+            line-height: 1;
+            transition: all 0.2s;
+        }
+        .menu-toggle:hover { border-color: var(--primary); }
+
+        header.open .nav-links {
+            display: flex !important;
+            flex-direction: column;
+            position: fixed;
+            top: 57px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 15, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            gap: 0;
+            z-index: 999;
+        }
+        header.open .nav-links a {
+            display: block;
+            padding: 12px 24px;
+            margin: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        header.open .nav-links a:hover { color: var(--text-primary); }
+        header.open .nav-links a:last-child { border-bottom: none; }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+
+            .announcement-card h2 {
+                font-size: 1.5rem;
+            }
+
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            main {
+                padding-top: 90px;
+            }
+
+            .announcement-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">G4 Turbo</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/research.html">Research</a>
+                <a href="/announcements.html" class="active">Announcements</a>
+                <a href="https://github.com/ssfdre38/gemma4-turbo">GitHub</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1>Latest Announcements</h1>
+            
+            <div class="announcement-list">
+                <!-- June 2, 2026 Milestone -->
+                <article class="announcement-card">
+                    <span class="announcement-date">June 2, 2026</span>
+                    <span class="milestone-badge">🏆 Project Milestone</span>
+                    <h2>G4 Turbo hits 18.8k pulls on Ollama Hub!</h2>
+                    <div class="announcement-content">
+                        <p>
+                            We are thrilled to announce that the <span class="highlight-text">gemma4-turbo</span> family has officially surpassed 
+                            <span class="highlight-text">18,800 pulls</span> on the Ollama Hub. This cements our position as the 
+                            #1 community-optimized build for Google's Gemma 4.
+                        </p>
+                        <p>
+                            Our <span class="highlight-text">IQ4_XS</span> quantization continues to be the preferred choice for users seeking 
+                            the perfect balance of performance and quality on consumer CPUs.
+                        </p>
+                        <p>
+                            Additionally, the <span class="highlight-text">gemma4-nano</span> model has seen a massive surge in popularity, 
+                            hitting <span class="highlight-text">1,117 pulls</span>. This confirms the growing demand for AI that can run 
+                            on extreme edge hardware like mobile phones and low-RAM devices.
+                        </p>
+                    </div>
+                </article>
+
+                <!-- Initial Launch Announcement -->
+                <article class="announcement-card">
+                    <span class="announcement-date">April 15, 2026</span>
+                    <span class="milestone-badge">🚀 Project Launch</span>
+                    <h2>Introducing G4 Turbo: Gemma 4 for Everyone</h2>
+                    <div class="announcement-content">
+                        <p>
+                            Today we are launching the G4 Turbo project. Our goal is simple: to make Google's Gemma 4 models 
+                            run faster and more efficiently on the hardware you already own.
+                        </p>
+                        <p>
+                            Starting with the <span class="highlight-text">e2b</span> and <span class="highlight-text">e4b</span> variants, we are 
+                            releasing optimized weights that offer up to 51% faster inference speeds compared to stock builds.
+                        </p>
+                    </div>
+                </article>
+            </div>
+
+            <div style="margin: 4rem 0 2rem; text-align: center;">
+                <p class="muted">Follow us on <a href="https://github.com/ssfdre38" style="color: var(--primary);">GitHub</a> for real-time code updates.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/ssfdre38/gemma4-turbo">GitHub</a>
+                <a href="https://ollama.com/ssfdre38">Ollama Hub</a>
+                <a href="https://huggingface.co/ssfdre38">Hugging Face</a>
+                <a href="https://discord.gg/DCYC2fFQQ6">Discord</a>
+                <a href="https://www.kaggle.com/competitions/gemma-4-good-hackathon/writeups/gemma4-turbo">Kaggle</a>
+                <a href="https://ssfdre38.xyz/research.html">Research</a>
+                <a href="https://ssfdre38.xyz">Developer</a>
+            </div>
+            <p>&copy; 2026 G4 Turbo. Built by <a href="https://ssfdre38.xyz" style="color: var(--primary);">ssfdre38</a> for the Gemma 4 Good Hackathon.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Apache 2.0 License • Based on Google Gemma 4</p>
+        </div>
+    </footer>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const headerEl = document.querySelector('header');
+        if (menuToggle && headerEl) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                headerEl.classList.toggle('open');
+                menuToggle.textContent = headerEl.classList.contains('open') ? '✕' : '☰';
+            });
+            document.addEventListener('click', (e) => {
+                if (!headerEl.contains(e.target)) {
+                    headerEl.classList.remove('open');
+                    menuToggle.textContent = '☰';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
