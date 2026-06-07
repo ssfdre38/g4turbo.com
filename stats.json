@@ -1,24 +1,14 @@
 {
-    "models": [
-        {
-            "id": "gemma-4-turbo",
-            "downloads": 18800,
-            "stars": 412,
-            "status": "Stable"
-        },
-        {
-            "id": "gemma-4-nano",
-            "downloads": 1117,
-            "stars": 89,
-            "status": "Active"
-        },
-        {
-            "id": "gemma-4-vision-12b",
-            "downloads": 4200,
-            "stars": 156,
-            "status": "Beta"
-        }
-    ],
-    "total_community_downloads": 24117,
-    "last_updated": "2026-06-06T16:00:00Z"
+  "turbo": {
+    "ollama": 0,
+    "hf": 3031,
+    "total": 3031
+  },
+  "nano": {
+    "ollama": 0,
+    "hf": 3553,
+    "total": 3553
+  },
+  "total": 6584,
+  "updated": "2026-06-07T07:34:06Z"
 }
