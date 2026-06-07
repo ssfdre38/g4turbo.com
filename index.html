@@ -826,8 +826,10 @@ e4b   → 4.7 GB   <span class="code-comment"># Balanced</span>
         async function updateDownloadCounts() {
             // Load Ollama baseline counts from stats.json
             const stats = await fetch('/stats.json').then(r => r.json()).catch(() => ({}));
-            const turboOllama = stats?.turbo?.ollama ?? 0;
-            const nanoOllama  = stats?.nano?.ollama  ?? 0;
+            const turboModel = stats?.models?.find(m => m.id === 'gemma-4-turbo');
+            const nanoModel  = stats?.models?.find(m => m.id === 'gemma-4-nano');
+            const turboOllama = turboModel ? turboModel.downloads : 0;
+            const nanoOllama  = nanoModel ? nanoModel.downloads : 0;
 
             // Fetch live HuggingFace download counts
             const [turboHF, nanoHF] = await Promise.all([
