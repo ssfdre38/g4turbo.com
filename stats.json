@@ -2,13 +2,13 @@
     "models": [
         {
             "id": "gemma-4-turbo",
-            "downloads": 21000,
+            "downloads": 21100,
             "stars": 412,
             "status": "Stable"
         },
         {
             "id": "gemma-4-nano",
-            "downloads": 1680,
+            "downloads": 1692,
             "stars": 89,
             "status": "Active"
         },
@@ -19,6 +19,6 @@
             "status": "Beta"
         }
     ],
-    "total_community_downloads": 26165,
-    "last_updated": "2026-06-30T07:29:43Z"
+    "total_community_downloads": 26444,
+    "last_updated": "2026-07-01T07:42:02Z"
 }
