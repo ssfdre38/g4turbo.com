@@ -8,7 +8,7 @@
         },
         {
             "id": "gemma-4-nano",
-            "downloads": 1738,
+            "downloads": 1746,
             "stars": 89,
             "status": "Active"
         },
@@ -19,6 +19,6 @@
             "status": "Beta"
         }
     ],
-    "total_community_downloads": 27292,
-    "last_updated": "2026-07-04T07:07:32Z"
+    "total_community_downloads": 27289,
+    "last_updated": "2026-07-05T07:13:52Z"
 }
